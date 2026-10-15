@@ -1,0 +1,195 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 30%, #3b3022, #15110d 72%);
+  color: #fff8dc;
+  transition: opacity 500ms ease, visibility 500ms ease;
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader__mark {
+  width: min(320px, 72vw);
+}
+
+.loader svg {
+  width: 100%;
+  overflow: visible;
+}
+
+.feather {
+  fill: rgba(32, 112, 89, 0.72);
+  stroke: #69a66f;
+  stroke-width: 2;
+  transform-origin: 132px 118px;
+  animation: featherIn 1300ms ease both;
+}
+
+.feather-stem,
+.hand,
+.flute path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feather-stem {
+  stroke: #d7a84b;
+  stroke-width: 3;
+}
+
+.feather-eye.outer {
+  fill: #315f9c;
+}
+
+.feather-eye.mid {
+  fill: #d7a84b;
+}
+
+.feather-eye.inner {
+  fill: #172b42;
+}
+
+.hand {
+  stroke: #f4c88b;
+  stroke-width: 10;
+  opacity: 0;
+  animation: fadeRise 700ms ease 700ms both;
+}
+
+.flute {
+  opacity: 0;
+  animation: fluteIn 800ms ease 1050ms both;
+}
+
+.flute path {
+  stroke: #d7a84b;
+  stroke-width: 10;
+}
+
+.flute circle {
+  fill: #5f3e1f;
+}
+
+.loader__brand {
+  position: absolute;
+  bottom: 12vh;
+  display: grid;
+  gap: 6px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeRise 800ms ease 1700ms both;
+}
+
+.loader__brand span {
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.loader__brand small {
+  color: #d7c99f;
+}
+
+.loader__particles::before,
+.loader__particles::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d7a84b;
+  box-shadow: 80px 30px #68a16f, -90px 45px #d7a84b, 120px -70px #68a16f, -130px -50px #d7a84b;
+  animation: particleDrift 2800ms ease-in-out infinite alternate;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  background-size: 220% 100%;
+  animation: shimmer 1500ms linear infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes featherIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(-12deg) scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fluteIn {
+  from {
+    opacity: 0;
+    transform: translateX(-34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes particleDrift {
+  from {
+    transform: translate(-20px, 12px);
+  }
+  to {
+    transform: translate(24px, -18px);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .loader {
+    display: none;
+  }
+
+  body.is-loading {
+    overflow: auto;
+  }
+}
